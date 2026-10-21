@@ -24,8 +24,8 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Accept Android SDK Licenses
+        run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses 2>/dev/null || true
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
@@ -54,12 +54,12 @@ jobs:
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' || github.event_name == 'workflow_dispatch'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: latest
-          name: "MYRA AI Voice Assistant - Latest APK Build"
+          tag_name: v1.0.0
+          name: "MYRA AI Voice Assistant - v1.0.0 APK"
           body: |
             ## 🚀 MYRA AI Voice Assistant - Latest Build
             
-            Compiled automatically with Android Gradle Plugin & Java 17.
+            Android APK built with Android Gradle Plugin & Java 17.
             
             ### 📱 Download APKs:
             - **Debug APK (Recommended for Testing)**: Download `app-debug.apk` below
