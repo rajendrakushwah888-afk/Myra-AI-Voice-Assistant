@@ -250,15 +250,11 @@ class MainActivity : AppCompatActivity() {
     } catch (e: Exception) {
       Log.e(TAG, "Error starting CallMonitorService", e)
     }
-    // WakeWordService bhi start karo — "Hey Myra" lock screen detection
+    // WakeWordService foreground me nahi chalega — mic conflict na ho
     try {
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        startForegroundService(Intent(this, com.myra.assistant.service.WakeWordService::class.java))
-      } else {
-        startService(Intent(this, com.myra.assistant.service.WakeWordService::class.java))
-      }
+      stopService(Intent(this, com.myra.assistant.service.WakeWordService::class.java))
     } catch (e: Exception) {
-      Log.e(TAG, "Error starting WakeWordService", e)
+      Log.e(TAG, "Error stopping WakeWordService in setup", e)
     }
   }
 
@@ -669,6 +665,9 @@ class MainActivity : AppCompatActivity() {
   override fun onResume() {
     super.onResume()
     try {
+      stopService(Intent(this, com.myra.assistant.service.WakeWordService::class.java))
+    } catch (e: Exception) {}
+    try {
       val apiKey = BuildConfig.GEMINI_API_KEY
       val manualKey = prefs.getString("api_key", "") ?: ""
       if ((apiKey.isNotBlank() || manualKey.isNotBlank()) && ::geminiLive.isInitialized && !geminiLive.isConnected) {
@@ -676,6 +675,19 @@ class MainActivity : AppCompatActivity() {
       }
     } catch (e: Exception) {
       Log.e(TAG, "Error in onResume", e)
+    }
+  }
+
+  override fun onStop() {
+    super.onStop()
+    try {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        startForegroundService(Intent(this, com.myra.assistant.service.WakeWordService::class.java))
+      } else {
+        startService(Intent(this, com.myra.assistant.service.WakeWordService::class.java))
+      }
+    } catch (e: Exception) {
+      Log.e(TAG, "Error starting WakeWordService onStop", e)
     }
   }
 

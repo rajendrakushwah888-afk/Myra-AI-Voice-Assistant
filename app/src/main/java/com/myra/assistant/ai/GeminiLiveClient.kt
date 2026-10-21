@@ -25,7 +25,10 @@ class GeminiLiveClient(
   }
 
   private val client = OkHttpClient.Builder()
-    .pingInterval(15, TimeUnit.SECONDS)
+    .readTimeout(0, TimeUnit.MILLISECONDS)
+    .writeTimeout(0, TimeUnit.MILLISECONDS)
+    .pingInterval(0, TimeUnit.SECONDS)
+    .retryOnConnectionFailure(true)
     .build()
 
   private var webSocket: WebSocket? = null
