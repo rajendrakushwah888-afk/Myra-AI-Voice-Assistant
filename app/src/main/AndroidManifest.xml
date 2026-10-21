@@ -43,7 +43,7 @@
     android:theme="@style/Theme.Myra"
     android:usesCleartextTraffic="false"
     android:networkSecurityConfig="@xml/network_security_config"
-    tools:targetApi="36">
+    tools:targetApi="34">
 
     <activity
       android:name=".ui.main.MainActivity"

@@ -69,8 +69,8 @@ class GeminiLiveClient(
     }
     Log.d(TAG, "Connecting with ${if (manualKey != null) "manual key" else "BuildConfig key"}")
 
-    val model = prefs.getString("gemini_model", "models/gemini-2.5-flash-native-audio-preview-12-2025")
-      ?: "models/gemini-2.5-flash-native-audio-preview-12-2025"
+    val model = prefs.getString("gemini_model", "models/gemini-2.0-flash-exp")
+      ?: "models/gemini-2.0-flash-exp"
     val voice = prefs.getString("gemini_voice", "Aoede") ?: "Aoede"
     val userName = prefs.getString("user_name", "Sir") ?: "Sir"
     val personality = prefs.getString("personality_mode", "gf") ?: "gf"

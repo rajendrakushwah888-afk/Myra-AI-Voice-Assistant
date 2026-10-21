@@ -91,9 +91,9 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     val models = listOf(
-      "Native Audio (Human Voice)",
-      "Flash Live (Fast)",
-      "Pro Audio Dialog"
+      "Gemini 2.0 Flash Live (Voice)",
+      "Gemini 2.0 Flash (Fast)",
+      "Gemini 2.0 Flash Thinking"
     )
     modelSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, models).apply {
       setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -120,11 +120,11 @@ class SettingsActivity : AppCompatActivity() {
       userNameInput.setText(prefs.getString("user_name", "Sir"))
 
       val modelMap = mapOf(
-        "models/gemini-2.5-flash-native-audio-preview-12-2025" to 0,
-        "models/gemini-2.0-flash-live-001" to 1,
-        "models/gemini-2.5-flash-preview-native-audio-dialog" to 2
+        "models/gemini-2.0-flash-exp" to 0,
+        "models/gemini-2.0-flash" to 1,
+        "models/gemini-2.0-flash-thinking-exp-01-21" to 2
       )
-      val savedModel = prefs.getString("gemini_model", "models/gemini-2.5-flash-native-audio-preview-12-2025")
+      val savedModel = prefs.getString("gemini_model", "models/gemini-2.0-flash-exp")
       modelSpinner.setSelection(modelMap[savedModel] ?: 0)
 
       val voiceMap = mapOf(
@@ -206,9 +206,9 @@ class SettingsActivity : AppCompatActivity() {
   private fun saveSettings() {
     try {
       val modelValues = listOf(
-        "models/gemini-2.5-flash-native-audio-preview-12-2025",
-        "models/gemini-2.0-flash-live-001",
-        "models/gemini-2.5-flash-preview-native-audio-dialog"
+        "models/gemini-2.0-flash-exp",
+        "models/gemini-2.0-flash",
+        "models/gemini-2.0-flash-thinking-exp-01-21"
       )
       val voiceValues = listOf(
         "Aoede", "Charon", "Kore", "Fenrir", "Puck", "Leda", "Orus", "Zephyr"
